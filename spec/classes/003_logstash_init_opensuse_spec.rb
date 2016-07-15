@@ -33,7 +33,6 @@ describe 'logstash', :type => 'class' do
         it { should contain_file('/etc/logstash/plugins/logstash/filters') }
         it { should contain_file('/etc/logstash/plugins/logstash/codecs') }
 
-        it { should contain_file_concat('ls-config') }
       end
 
       context 'package installation' do
@@ -234,7 +233,7 @@ describe 'logstash', :type => 'class' do
          it { should contain_service('logstash').with(:ensure => 'stopped', :enable => false) }
 
       end
- 
+
       context 'Repo management' do
 
         case distro

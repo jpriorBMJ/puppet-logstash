@@ -34,8 +34,6 @@ describe 'logstash', :type => 'class' do
         it { should contain_file('/etc/logstash/plugins/logstash/filters') }
         it { should contain_file('/etc/logstash/plugins/logstash/codecs') }
 
-        it { should contain_file_concat('ls-config') }
-
       end
 
       context 'core package installation' do

@@ -1,6 +1,6 @@
 # == define: logstash::configfile
 #
-# This define is to manage the config files for Logstah
+# This define is to manage the config files for Logstash
 #
 # === Parameters
 #
@@ -11,7 +11,8 @@
 #  Supply a puppet file resource to be used for the config file.
 #
 # [*order*]
-#  The order number controls in which sequence the config file fragments are concatenated.
+#  The order number controls in which sequence the config file fragments are
+#  concatenated.
 #
 # === Examples
 #
@@ -46,6 +47,10 @@ define logstash::configfile(
   $order = 10,
   $template = undef,
 ) {
+  File {
+    owner => $logstash::logstash_user,
+    group => $logstash::logstash_group,
+  }
 
   if ($template != undef ) {
     $config_content = template($template)
@@ -54,11 +59,12 @@ define logstash::configfile(
     $config_content = $content
   }
 
-  file_fragment { $name:
+  file { $name:
+    path    => "${logstash::configdir}/conf.d/${order}-${name}.conf",
     tag     => "LS_CONFIG_${::fqdn}",
     content => $config_content,
     source  => $source,
-    order   => $order,
-    before  => [ File_concat['ls-config'] ],
+    mode    => '0644',
+    before  => Notify['ls-config'],
   }
 }
