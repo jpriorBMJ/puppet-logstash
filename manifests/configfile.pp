@@ -40,6 +40,7 @@
 # === Authors
 #
 # * Richard Pijnenburg <mailto:richard.pijnenburg@elasticsearch.com>
+# * Jonathan Prior <mailto:jprior@bmj.com>
 #
 define logstash::configfile(
   $content = undef,

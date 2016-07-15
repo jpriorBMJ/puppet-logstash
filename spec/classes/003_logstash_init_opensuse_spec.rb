@@ -33,6 +33,7 @@ describe 'logstash', :type => 'class' do
         it { should contain_file('/etc/logstash/plugins/logstash/filters') }
         it { should contain_file('/etc/logstash/plugins/logstash/codecs') }
 
+        it { should contain_notify('ls-config') }
       end
 
       context 'package installation' do

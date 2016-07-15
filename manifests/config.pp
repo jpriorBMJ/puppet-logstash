@@ -21,6 +21,7 @@
 # === Authors
 #
 # * Richard Pijnenburg <mailto:richard.pijnenburg@elasticsearch.com>
+# * Jonathan Prior <mailto:jprior@bmj.com>
 #
 class logstash::config {
   File {

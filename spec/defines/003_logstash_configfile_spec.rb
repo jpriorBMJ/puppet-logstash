@@ -6,7 +6,7 @@ describe 'logstash::configfile', :type => 'define' do
     :operatingsystem => 'CentOS',
     :kernel => 'Linux'
   } end
-  
+
   let(:title) { 'configfile' }
 
   let(:pre_condition) { 'class {"logstash": }'}
@@ -18,7 +18,7 @@ describe 'logstash::configfile', :type => 'define' do
     } }
 
     it { should contain_logstash__configfile('configfile') }
-    it { should contain_file_fragment('configfile').with(:content => 'configfile content', :source => nil, :order => '10') }
+    it { should contain_file('configfile').with(:content => 'configfile content', :source => nil, :path => '/etc/logstash/conf.d/10-configfile.conf') }
 
   end
 
@@ -29,7 +29,7 @@ describe 'logstash::configfile', :type => 'define' do
     } }
 
     it { should contain_logstash__configfile('configfile') }
-    it { should contain_file_fragment('configfile').with(:source => 'puppet:///path/to/config', :content => nil, :order => '10') }
+    it { should contain_file('configfile').with(:source => 'puppet:///path/to/config', :content => nil, :path => '/etc/logstash/conf.d/10-configfile.conf') }
 
   end
 
@@ -41,9 +41,8 @@ describe 'logstash::configfile', :type => 'define' do
     } }
 
     it { should contain_logstash__configfile('configfile') }
-    it { should contain_file_fragment('configfile').with(:source => 'puppet:///path/to/config', :content => nil, :order => '100') }
+    it { should contain_file('configfile').with(:source => 'puppet:///path/to/config', :content => nil, :path => '/etc/logstash/conf.d/100-configfile.conf') }
 
   end
 
 end
-
